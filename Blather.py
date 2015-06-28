@@ -30,12 +30,14 @@ if not os.path.exists(lang_dir):
 class Blather:
 	def __init__(self, opts):
 
+
 		#import the recognizer so Gst doesn't clobber our -h
 		from Recognizer import Recognizer
 		self.ui = None
 		self.options = {}
 		ui_continuous_listen = False
 		self.continuous_listen = False
+		self.attentive = True
 
 		self.commands = {}
 
@@ -131,28 +133,37 @@ class Blather:
 	# Print the cmd and then run the command
 	def run_command(self, cmd):
 		print cmd
-		subprocess.call(cmd, shell=True)
+		subprocess.Popen(cmd, shell=True)
 
 	def recognizer_finished(self, recognizer, text):
 		t = text.lower()
+		print t
+		if t == 'oxygen':
+			self.attentive = True
 		#is there a matching command?
-		if self.commands.has_key( t ):
+		
+		if self.commands.has_key( t ) and self.attentive:
 			#run the valid_sentence_command if there is a valid sentence command
 			if self.options['valid_sentence_command']:
 				subprocess.call(self.options['valid_sentence_command'], shell=True)
 			cmd = self.commands[t]
 			#should we be passing words?
+			
 			if self.options['pass_words']:
 				cmd+=" "+t
 				self.run_command(cmd)
 			else:
 				self.run_command(cmd)
+				
 			self.log_history(text)
 		else:
 			#run the invalid_sentence_command if there is a valid sentence command
 			if self.options['invalid_sentence_command']:
 				subprocess.call(self.options['invalid_sentence_command'], shell=True)
 			print "no matching command %s" %(t)
+		
+		if t == 'stop listening':
+			self.attentive = False
 		#if there is a UI and we are not continuous listen
 		if self.ui:
 			if not self.continuous_listen:

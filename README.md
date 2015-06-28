@@ -9,6 +9,13 @@ Blather is a speech recognizer that will run commands when a user speaks preset 
 5. pygtk (only required for the Gtk based UI)
 6. pyyaml (only required for reading the options file)
 
+#Debian:
+apt-get install python-sphinx python-pyside python-gst0.10-dev libgstreamer0.10-dev
+apt-get install libgstreamer-plugins-base0.10-dev libgstreamerlibgstreamer0.10-cil-dev
+apt-get install rygel-gst-launch gstreamer0.10-plugins-good gstreamer0.10-tools
+
+*Note:* I seperated these to make them smaller on your screen. There is no functional reason to run them seperately.
+
 ##Usage
 0. move commands.tmp to ~/.config/blather/commands.conf and fill the file with sentences and command to run
 1. Run Blather.py, this will generate ~/.config/blather/sentences.corpus based on sentences in the 'commands' file
