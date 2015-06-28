@@ -15,7 +15,9 @@ except:
 	print "YAML is not supported. ~/.config/blather/options.yaml will not function"
 
 #where are the files?
-conf_dir = os.path.expanduser("~/.config/blather")
+#conf_dir = os.path.expanduser("~/.config/blather")
+conf_dir = os.getcwd()
+conf_dir = os.path.join(conf_dir,"config")
 lang_dir = os.path.join(conf_dir, "language")
 command_file = os.path.join(conf_dir, "commands.conf")
 strings_file = os.path.join(conf_dir, "sentences.corpus")
@@ -138,10 +140,12 @@ class Blather:
 	def recognizer_finished(self, recognizer, text):
 		t = text.lower()
 		print t
+		
+		#bump the computer into attentive listening mode. This enables all the other commands.
 		if t == 'oxygen':
 			self.attentive = True
-		#is there a matching command?
 		
+		#is there a matching command?
 		if self.commands.has_key( t ) and self.attentive:
 			#run the valid_sentence_command if there is a valid sentence command
 			if self.options['valid_sentence_command']:
@@ -162,8 +166,10 @@ class Blather:
 				subprocess.call(self.options['invalid_sentence_command'], shell=True)
 			print "no matching command %s" %(t)
 		
+		#this is to step the computer out of attentive mode. It will now only listen for it's name.
 		if t == 'stop listening':
 			self.attentive = False
+		
 		#if there is a UI and we are not continuous listen
 		if self.ui:
 			if not self.continuous_listen:

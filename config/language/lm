@@ -1,0 +1,90 @@
+Language model created by QuickLM on Sun Jun 28 18:35:06 EDT 2015
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 11 sentences and 19 words
+
+\data\
+ngram 1=19
+ngram 2=28
+ngram 3=20
+
+\1-grams:
+-0.8829 </s> -0.3010
+-0.8829 <s> -0.2401
+-1.9243 DOWN -0.2401
+-1.9243 HELLO -0.2958
+-1.9243 LISTENING -0.2401
+-1.6232 MUSIC -0.2401
+-1.9243 NETFLIX -0.2401
+-1.9243 NEXT -0.2906
+-1.9243 OPEN -0.2958
+-1.9243 OXYGEN -0.2401
+-1.9243 PAUSE -0.2906
+-1.9243 PLAY -0.2906
+-1.9243 PREVIOUS -0.2906
+-1.6232 SONG -0.2401
+-1.9243 SPOTIFY -0.2401
+-1.9243 STOP -0.2958
+-1.9243 UP -0.2401
+-1.6232 VOLUME -0.2906
+-1.9243 WORLD -0.2401
+
+\2-grams:
+-1.3424 <s> HELLO 0.0000
+-1.3424 <s> NETFLIX 0.0000
+-1.3424 <s> NEXT 0.0000
+-1.3424 <s> OPEN 0.0000
+-1.3424 <s> OXYGEN 0.0000
+-1.3424 <s> PAUSE 0.0000
+-1.3424 <s> PLAY 0.0000
+-1.3424 <s> PREVIOUS 0.0000
+-1.3424 <s> STOP 0.0000
+-1.0414 <s> VOLUME 0.0000
+-0.3010 DOWN </s> -0.3010
+-0.3010 HELLO WORLD 0.0000
+-0.3010 LISTENING </s> -0.3010
+-0.3010 MUSIC </s> -0.3010
+-0.3010 NETFLIX </s> -0.3010
+-0.3010 NEXT SONG 0.0000
+-0.3010 OPEN SPOTIFY 0.0000
+-0.3010 OXYGEN </s> -0.3010
+-0.3010 PAUSE MUSIC 0.0000
+-0.3010 PLAY MUSIC 0.0000
+-0.3010 PREVIOUS SONG 0.0000
+-0.3010 SONG </s> -0.3010
+-0.3010 SPOTIFY </s> -0.3010
+-0.3010 STOP LISTENING 0.0000
+-0.3010 UP </s> -0.3010
+-0.6021 VOLUME DOWN 0.0000
+-0.6021 VOLUME UP 0.0000
+-0.3010 WORLD </s> -0.3010
+
+\3-grams:
+-0.3010 <s> HELLO WORLD
+-0.3010 <s> NETFLIX </s>
+-0.3010 <s> NEXT SONG
+-0.3010 <s> OPEN SPOTIFY
+-0.3010 <s> OXYGEN </s>
+-0.3010 <s> PAUSE MUSIC
+-0.3010 <s> PLAY MUSIC
+-0.3010 <s> PREVIOUS SONG
+-0.3010 <s> STOP LISTENING
+-0.6021 <s> VOLUME DOWN
+-0.6021 <s> VOLUME UP
+-0.3010 HELLO WORLD </s>
+-0.3010 NEXT SONG </s>
+-0.3010 OPEN SPOTIFY </s>
+-0.3010 PAUSE MUSIC </s>
+-0.3010 PLAY MUSIC </s>
+-0.3010 PREVIOUS SONG </s>
+-0.3010 STOP LISTENING </s>
+-0.3010 VOLUME DOWN </s>
+-0.3010 VOLUME UP </s>
+
+\end\
