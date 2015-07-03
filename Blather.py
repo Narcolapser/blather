@@ -14,6 +14,8 @@ try:
 except:
 	print "YAML is not supported. ~/.config/blather/options.yaml will not function"
 
+import Command
+
 #where are the files?
 #conf_dir = os.path.expanduser("~/.config/blather")
 conf_dir = os.getcwd()
@@ -42,6 +44,7 @@ class Blather:
 		self.attentive = True
 
 		self.commands = {}
+		self.commander = Command.Commander(command_file,strings_file)
 
 		#read the commands
 		self.read_commands()
@@ -139,6 +142,9 @@ class Blather:
 
 	def recognizer_finished(self, recognizer, text):
 		t = text.lower()
+		
+		self.commander(t)
+		'''
 		print t
 		
 		#bump the computer into attentive listening mode. This enables all the other commands.
@@ -169,7 +175,7 @@ class Blather:
 		#this is to step the computer out of attentive mode. It will now only listen for it's name.
 		if t == 'stop listening':
 			self.attentive = False
-		
+		'''
 		#if there is a UI and we are not continuous listen
 		if self.ui:
 			if not self.continuous_listen:
@@ -177,6 +183,7 @@ class Blather:
 				self.recognizer.pause()
 			#let the UI know that there is a finish
 			self.ui.finished(t)
+		
 
 	def run(self):
 		if self.ui:
