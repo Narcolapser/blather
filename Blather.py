@@ -41,13 +41,12 @@ class Blather:
 		self.options = {}
 		ui_continuous_listen = False
 		self.continuous_listen = False
-		self.attentive = True
 
 		self.commands = {}
 		self.commander = Command.Commander(command_file,strings_file)
 
 		#read the commands
-		self.read_commands()
+		#self.read_commands()
 
 		#load the options file
 		self.load_options()
@@ -95,21 +94,22 @@ class Blather:
 
 	def read_commands(self):
 		#read the.commands file
-		file_lines = open(command_file)
-		strings = open(strings_file, "w")
-		for line in file_lines:
-				print line
-				#trim the white spaces
-				line = line.strip()
-				#if the line has length and the first char isn't a hash
-				if len(line) and line[0]!="#":
-						#this is a parsible line
-						(key,value) = line.split(":",1)
-						print key, value
-						self.commands[key.strip().lower()] = value.strip()
-						strings.write( key.strip()+"\n")
-		#close the strings file
-		strings.close()
+		pass
+#		file_lines = open(command_file)
+#		strings = open(strings_file, "w")
+#		for line in file_lines:
+#				print line
+#				#trim the white spaces
+#				line = line.strip()
+#				#if the line has length and the first char isn't a hash
+#				if len(line) and line[0]!="#":
+#						#this is a parsible line
+#						(key,value) = line.split(":",1)
+#						print key, value
+#						self.commands[key.strip().lower()] = value.strip()
+#						strings.write( key.strip()+"\n")
+#		#close the strings file
+#		strings.close()
 
 	def load_options(self):
 		#is there an opt file?
@@ -137,8 +137,9 @@ class Blather:
 
 	# Print the cmd and then run the command
 	def run_command(self, cmd):
-		print cmd
-		subprocess.Popen(cmd, shell=True)
+		pass
+		#print cmd
+		#subprocess.Popen(cmd, shell=True)
 
 	def recognizer_finished(self, recognizer, text):
 		t = text.lower()

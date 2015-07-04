@@ -1,0 +1,100 @@
+{"commands":
+	[
+		{
+			"name":"hello World",
+			"call":"hello world",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"echo \"Hello World\""
+			}
+		},
+		{
+			"name":"dismiss computer",
+			"call":"stop listening",
+			"cmd":{
+				"type":"blather",
+				"instruction":"self.attentive = False"
+			}
+		},
+		{
+			"name":"call computer to attention",
+			"call":"computer",
+			"cmd":{
+				"type":"blather",
+				"instruction":"self.attentive = True"
+			}
+		},
+		{
+			"name":"open spotify",
+			"call":"open spotify",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"spotify"
+			}
+		},
+		{
+			"name":"System music play",
+			"call":"play music",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"xvkbd -text '\\[XF86AudioPlay]'"
+			}
+		},
+		{
+			"name":"System music stop",
+			"call":"pause music",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"xvkbd -text '\\[XF86AudioStop]'"
+			}
+		},
+		{
+			"name":"System music skip track",
+			"call":"next song",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"xvkbd -text '\\[XF86AudioNext]'"
+			}
+		},
+		{
+			"name":"System music previous track",
+			"call":"previous song",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"xvkbd -text '\\[XF86AudioPrev]'"
+			}
+		},
+		{
+			"name":"System Volume up one notch.",
+			"call":"volume up",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"xvkbd -text '\\[XF86AudioRaiseVolume]'"
+			}
+		},
+		{
+			"name":"System Volume down one notch",
+			"call":"volume down",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"xvkbd -text '\\[XF86AudioLowerVolume]'"
+			}
+		},
+		{
+			"name":"Open netflix",
+			"call":"netflix",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"google-chrome"
+			}
+		},
+		{
+			"name":"Open netflix to White Collar",
+			"call":"White Collar",
+			"cmd":{
+				"type":"cmd",
+				"instruction":"google-chrome http://www.netflix.com/watch/70243487"
+			}
+		}
+	]
+}

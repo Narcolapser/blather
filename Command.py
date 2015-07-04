@@ -3,6 +3,7 @@ import signal
 import gobject
 import os.path
 import subprocess
+import json
 
 
 class Commander (object):
@@ -27,23 +28,9 @@ class Commander (object):
 		
 		#is there a matching command?
 		if self.commands.has_key( t ) and self.attentive:
-			#run the valid_sentence_command if there is a valid sentence command
-#			if self.options['valid_sentence_command']:
-#				subprocess.call(self.options['valid_sentence_command'], shell=True)
 			cmd = self.commands[t]
-			#should we be passing words?
-			
-#			if self.options['pass_words']:
-			if False:
-				cmd+=" "+t
-				self.run_command(cmd)
-			else:
-				self.run_command(cmd)
-			
+			self.run_command(cmd)
 		else:
-			#run the invalid_sentence_command if there is a valid sentence command
-			#if self.options['invalid_sentence_command']:
-			#	subprocess.call(self.options['invalid_sentence_command'], shell=True)
 			print "no matching command %s" %(t)
 		
 		#this is to step the computer out of attentive mode. It will now only listen for it's name.
@@ -52,21 +39,15 @@ class Commander (object):
 	
 	def read_commands(self):
 		#read the.commands file
-		file_lines = open(self.command_file)
-		strings = open(self.strings_file, "w")
-		for line in file_lines:
-				print line
-				#trim the white spaces
-				line = line.strip()
-				#if the line has length and the first char isn't a hash
-				if len(line) and line[0]!="#":
-						#this is a parsible line
-						(key,value) = line.split(":",1)
-						print key, value
-						self.commands[key.strip().lower()] = value.strip()
-						strings.write( key.strip()+"\n")
-		#close the strings file
-		strings.close()
+		with open(self.command_file.replace('.conf','.json'),'r') as jf:
+			js = jf.read()
+			jl = json.loads(js)
+			self.cmd_json = jl['commands']
+		
+		for cmd in self.cmd_json:
+			self.commands[cmd['call']] = cmd['cmd']['instruction']
+		
+		print self.commands
 	
 	def run_command(self, cmd):
 		print cmd
@@ -74,8 +55,18 @@ class Commander (object):
 
 class Command (object):
 
-	def __init__(self):
+	def __init__(self,json_config):
 		pass
 
 	def __call__(self):
 		pass
+
+	def match(self,val):
+		pass
+
+class CMD( Command ):
+	def __init__(self,json_config):
+		self.js = json_config
+
+	def __call__(self):
+		subprocess.Popen(self.js['cmd']['instruction'],cmd, shell=True)
