@@ -13,7 +13,10 @@ class Commander (object):
 		self.strings_file = strings_file
 		self.attentive = True
 		
-		self.commands = {}
+		self.load_command_types()
+		
+		#self.commands = {}
+		self.commands = []
 		
 		self.read_commands()
 		
@@ -26,14 +29,11 @@ class Commander (object):
 		if t == 'oxygen':
 			self.attentive = True
 		
-		#is there a matching command?
-		if self.commands.has_key( t ) and self.attentive:
-			cmd = self.commands[t]
-			self.run_command(cmd)
-		else:
-			print "no matching command %s" %(t)
-		
-		#this is to step the computer out of attentive mode. It will now only listen for it's name.
+		for cmd_type in self.command_types:
+			lt = t in self.command_types[cmd_type]
+			print('checking my command {0} for {1}: {2}'.format(cmd_type,t,lt))
+			if t in self.command_types[cmd_type]:
+				self.command_types[cmd_type](t)
 		if t == 'stop listening':
 			self.attentive = False
 	
@@ -45,28 +45,113 @@ class Commander (object):
 			self.cmd_json = jl['commands']
 		
 		for cmd in self.cmd_json:
-			self.commands[cmd['call']] = cmd['cmd']['instruction']
+			self.command_types[cmd['cmd']['type']].append(cmd)
 		
-		print self.commands
+		print self.command_types
 	
 	def run_command(self, cmd):
 		print cmd
 		subprocess.Popen(cmd, shell=True)
 
+	def load_command_types(self):
+		self.command_types = {}
+		
+		self.command_types['CMD'] = CMD(self)
+		self.command_types['blather'] = BlatherCMD(self)
+		self.command_types['AudioLog'] = AudioLog(self)
+		
+
+
 class Command (object):
 
-	def __init__(self,json_config):
+	def __init__(self,commander):
 		pass
 
 	def __call__(self):
 		pass
 
-	def match(self,val):
+	def __contains__(self,val):
+		pass
+	
+	def __str__(self):
+		pass
+	
+	def __repr__(self):
 		pass
 
 class CMD( Command ):
-	def __init__(self,json_config):
-		self.js = json_config
+	def __init__(self,commander):
+		self.com = commander
+		self.cmds = {}
 
-	def __call__(self):
-		subprocess.Popen(self.js['cmd']['instruction'],cmd, shell=True)
+	def __call__(self,call):
+		subprocess.Popen(self.cmds[call], shell=True)
+		print 'shot off a command for {0}'.format(call)
+
+	def __contains__(self,call):
+		print 'checking for key {0} in my keys {1}'.format(call,self.cmds.keys())
+		return self.cmds.has_key(call)
+
+	def append(self,jc):
+		self.cmds[jc['call']] = jc['cmd']['instruction']
+	
+#	def __str__(self):
+#		pass
+	
+	def __repr__(self):
+		return "command line functions, i have {0} commands: {1}".format(len(self.cmds.keys()),self.cmds)
+
+class BlatherCMD (Command):
+
+	def __init__(self,commander):
+		self.com = commander
+		self.cmds = {}
+
+	def __call__(self,val):
+		pass
+
+	def __contains__(self,val):
+		print 'Checking blather containment'
+		for i in self.cmds:
+			if val == i: return True
+		return False
+	
+	def append(self,jc):
+		self.cmds[jc['call']] = jc['cmd']['instruction']
+
+#	def __str__(self):
+#		pass
+
+	def __repr__(self):
+		return "Blather Control functions, i have {0} commands: {1}".format(len(self.cmds.keys()),self.cmds)
+
+class AudioLog (object):
+
+	def __init__(self,commander):
+		self.com = commander
+		self.cmds = {}
+		self.loggingProc = None
+
+	def __call__(self,val):
+		print 'I was called silly! {0}'.format(self.cmds[val])
+		if val == 'new log entry':
+			print "======================= BEGINING LOG ========================"
+			self.loggingProc = subprocess.Popen(self.cmds[val],shell=True)
+			print "======================= LOG BEGAN ==========================="
+		elif val == 'end log entry':
+			print "======================= ENDING LOG ========================"
+			self.loggingProc.kill()
+			print "======================= LOG ENDED ========================="
+
+	def __contains__(self,call):
+		return True
+		self.cmds.has_key(call)
+	
+	def append(self,jc):
+		self.cmds[jc['call']] = jc['cmd']['instruction']
+	
+	def __str__(self):
+		pass
+	
+	def __repr__(self):
+		return "AudioLog making functions, i have {0} commands: {1}".format(len(self.cmds.keys()),self.cmds)
