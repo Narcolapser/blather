@@ -4,7 +4,7 @@ import gobject
 import os.path
 import subprocess
 import json
-
+import time
 
 class Commander (object):
 
@@ -130,22 +130,27 @@ class AudioLog (object):
 	def __init__(self,commander):
 		self.com = commander
 		self.cmds = {}
-		self.loggingProc = None
+		self.recordingProc = None
+		self.rec_cmd = ['arecord', '-f', 'cd', '-t', 'wav']
+		self.mp3_cmd = ['lame','--preset','56','-mm','-','']
+		self.file_string = os.path.expanduser('~') + '/Google Drive/personal log/{0}.mp3'
 
 	def __call__(self,val):
 		print 'I was called silly! {0}'.format(self.cmds[val])
 		if val == 'new log entry':
 			print "======================= BEGINING LOG ========================"
-			self.loggingProc = subprocess.Popen(self.cmds[val],shell=True)
+			self.recordingProc = subprocess.Popen(self.rec_cmd,stdout=subprocess.PIPE)
+			self.mp3_cmd[5] = self.file_string.format(time.strftime("%y %m %d %H:%M"))
+			self.mp3Proc = subprocess.Popen(self.mp3_cmd,stdin=self.recordingProc.stdout)
 			print "======================= LOG BEGAN ==========================="
 		elif val == 'end log entry':
-			print "======================= ENDING LOG ========================"
-			self.loggingProc.kill()
-			print "======================= LOG ENDED ========================="
+			print "======================= ENDING LOG =========================="
+			self.recordingProc.kill()
+			self.mp3Proc.kill()
+			print "======================= LOG ENDED ==========================="
 
 	def __contains__(self,call):
-		return True
-		self.cmds.has_key(call)
+		return self.cmds.has_key(call)
 	
 	def append(self,jc):
 		self.cmds[jc['call']] = jc['cmd']['instruction']

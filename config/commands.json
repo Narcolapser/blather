@@ -101,7 +101,7 @@
 			"call":"new log entry",
 			"cmd":{
 				"type":"AudioLog",
-				"instruction":"arecord -f cd -t wav | lame --preset 56 -mm - date+%Y%m%d%H%M.mp3"
+				"instruction":"start"
 			}
 		},
 		{
