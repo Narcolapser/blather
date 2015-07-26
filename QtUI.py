@@ -52,7 +52,10 @@ class UI(gobject.GObject):
 	def accel_quit(self):
 		#emit the quit
 		self.emit("command", "quit")
-
+	
+	#function for managing the continuou listening check box being clicked. When it is clicked it 
+	#emits an event for blather to let blather know that the state of things has changed. This is
+	#caught by blather's process_command function.
 	def ccheckbox_clicked(self):
 		checked = self.ccheckbox.isChecked()
 		if checked:
@@ -66,6 +69,9 @@ class UI(gobject.GObject):
 			self.emit('command', "continuous_stop")
 			self.set_icon_inactive()
 
+
+	#functions related to the listen button. lsbutton_stopped is a quasi place holder for if I
+	#want to expand the end of listening to do other things as well.
 	def lsbutton_stopped(self):
 		self.lsbutton.setText("Listen")
 
@@ -82,6 +88,7 @@ class UI(gobject.GObject):
 			self.emit("command", "stop")
 			self.set_icon_inactive()
 
+	#called by blather right before the main loop is started. Mainloop is handled by gst. 
 	def run(self):
 		self.set_icon_inactive()
 		self.window.show()
@@ -92,12 +99,16 @@ class UI(gobject.GObject):
 		self.app.exec_()
 		self.emit("command", "quit")
 
+	#This function is called when it hears a pause in the audio. 
+	#This is called after the command has been sent of to the commander.
 	def finished(self, text):
 		#if the continuous isn't pressed
 		if not self.ccheckbox.isChecked():
 			self.lsbutton_stopped()
 		self.label.setText(text)
 
+
+	#functions dealing with the icon
 	def set_icon(self, icon):
 		self.window.setWindowIcon(QIcon(icon))
 
