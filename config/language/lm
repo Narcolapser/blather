@@ -1,4 +1,4 @@
-Language model created by QuickLM on Sun Jun 28 18:35:06 EDT 2015
+Language model created by QuickLM on Sun Jul  5 20:12:11 EDT 2015
 Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
 
 The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
@@ -7,50 +7,60 @@ The code that was used to produce this language model is available in Open Sourc
 Please visit http://www.speech.cs.cmu.edu/tools/ for more information
 
 The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
-This model based on a corpus of 11 sentences and 19 words
+This model based on a corpus of 13 sentences and 23 words
 
 \data\
-ngram 1=19
-ngram 2=28
-ngram 3=20
+ngram 1=23
+ngram 2=34
+ngram 3=25
 
 \1-grams:
--0.8829 </s> -0.3010
--0.8829 <s> -0.2401
--1.9243 DOWN -0.2401
--1.9243 HELLO -0.2958
--1.9243 LISTENING -0.2401
--1.6232 MUSIC -0.2401
--1.9243 NETFLIX -0.2401
--1.9243 NEXT -0.2906
--1.9243 OPEN -0.2958
--1.9243 OXYGEN -0.2401
--1.9243 PAUSE -0.2906
--1.9243 PLAY -0.2906
--1.9243 PREVIOUS -0.2906
--1.6232 SONG -0.2401
--1.9243 SPOTIFY -0.2401
--1.9243 STOP -0.2958
--1.9243 UP -0.2401
--1.6232 VOLUME -0.2906
--1.9243 WORLD -0.2401
+-0.9031 </s> -0.3010
+-0.9031 <s> -0.2430
+-2.0170 DOWN -0.2430
+-2.0170 END -0.2926
+-1.7160 ENTRY -0.2430
+-2.0170 HELLO -0.2968
+-2.0170 LISTENING -0.2430
+-1.7160 LOG -0.2926
+-1.7160 MUSIC -0.2430
+-2.0170 NETFLIX -0.2430
+-2.0170 NEW -0.2926
+-2.0170 NEXT -0.2926
+-2.0170 OPEN -0.2968
+-2.0170 OXYGEN -0.2430
+-2.0170 PAUSE -0.2926
+-2.0170 PLAY -0.2926
+-2.0170 PREVIOUS -0.2926
+-1.7160 SONG -0.2430
+-2.0170 SPOTIFY -0.2430
+-2.0170 STOP -0.2968
+-2.0170 UP -0.2430
+-1.7160 VOLUME -0.2926
+-2.0170 WORLD -0.2430
 
 \2-grams:
--1.3424 <s> HELLO 0.0000
--1.3424 <s> NETFLIX 0.0000
--1.3424 <s> NEXT 0.0000
--1.3424 <s> OPEN 0.0000
--1.3424 <s> OXYGEN 0.0000
--1.3424 <s> PAUSE 0.0000
--1.3424 <s> PLAY 0.0000
--1.3424 <s> PREVIOUS 0.0000
--1.3424 <s> STOP 0.0000
--1.0414 <s> VOLUME 0.0000
+-1.4150 <s> END 0.0000
+-1.4150 <s> HELLO 0.0000
+-1.4150 <s> NETFLIX 0.0000
+-1.4150 <s> NEW 0.0000
+-1.4150 <s> NEXT 0.0000
+-1.4150 <s> OPEN 0.0000
+-1.4150 <s> OXYGEN 0.0000
+-1.4150 <s> PAUSE 0.0000
+-1.4150 <s> PLAY 0.0000
+-1.4150 <s> PREVIOUS 0.0000
+-1.4150 <s> STOP 0.0000
+-1.1139 <s> VOLUME 0.0000
 -0.3010 DOWN </s> -0.3010
+-0.3010 END LOG 0.0000
+-0.3010 ENTRY </s> -0.3010
 -0.3010 HELLO WORLD 0.0000
 -0.3010 LISTENING </s> -0.3010
+-0.3010 LOG ENTRY 0.0000
 -0.3010 MUSIC </s> -0.3010
 -0.3010 NETFLIX </s> -0.3010
+-0.3010 NEW LOG 0.0000
 -0.3010 NEXT SONG 0.0000
 -0.3010 OPEN SPOTIFY 0.0000
 -0.3010 OXYGEN </s> -0.3010
@@ -66,8 +76,10 @@ ngram 3=20
 -0.3010 WORLD </s> -0.3010
 
 \3-grams:
+-0.3010 <s> END LOG
 -0.3010 <s> HELLO WORLD
 -0.3010 <s> NETFLIX </s>
+-0.3010 <s> NEW LOG
 -0.3010 <s> NEXT SONG
 -0.3010 <s> OPEN SPOTIFY
 -0.3010 <s> OXYGEN </s>
@@ -77,7 +89,10 @@ ngram 3=20
 -0.3010 <s> STOP LISTENING
 -0.6021 <s> VOLUME DOWN
 -0.6021 <s> VOLUME UP
+-0.3010 END LOG ENTRY
 -0.3010 HELLO WORLD </s>
+-0.3010 LOG ENTRY </s>
+-0.3010 NEW LOG ENTRY
 -0.3010 NEXT SONG </s>
 -0.3010 OPEN SPOTIFY </s>
 -0.3010 PAUSE MUSIC </s>
