@@ -11,7 +11,9 @@ Blather is a speech recognizer that will run commands when a user speaks preset 
 
 #Debian:
 apt-get install python-sphinx python-pyside python-gst0.10-dev libgstreamer0.10-dev
+
 apt-get install libgstreamer-plugins-base0.10-dev libgstreamerlibgstreamer0.10-cil-dev
+
 apt-get install rygel-gst-launch gstreamer0.10-plugins-good gstreamer0.10-tools
 
 *Note:* I seperated these to make them smaller on your screen. There is no functional reason to run them seperately.

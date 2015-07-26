@@ -27,14 +27,13 @@ history_file = os.path.join(conf_dir, "blather.history")
 opt_file = os.path.join(conf_dir, "options.yaml")
 lang_file = os.path.join(lang_dir,'lm')
 dic_file = os.path.join(lang_dir,'dic')
+
 #make the lang_dir if it doesn't exist
 if not os.path.exists(lang_dir):
 	os.makedirs(lang_dir)
 
 class Blather:
 	def __init__(self, opts):
-
-
 		#import the recognizer so Gst doesn't clobber our -h
 		from Recognizer import Recognizer
 		self.ui = None
@@ -42,11 +41,7 @@ class Blather:
 		ui_continuous_listen = False
 		self.continuous_listen = False
 
-		self.commands = {}
 		self.commander = Command.Commander(command_file,strings_file)
-
-		#read the commands
-		#self.read_commands()
 
 		#load the options file
 		self.load_options()
@@ -92,9 +87,6 @@ class Blather:
 
 		print "Using Options: ", self.options
 
-	def read_commands(self):
-		pass
-
 	def load_options(self):
 		#is there an opt file?
 		try:
@@ -103,7 +95,6 @@ class Blather:
 			self.options = yaml.load(text)
 		except:
 			pass
-
 
 	def log_history(self,text):
 		if self.options['history']:
@@ -119,44 +110,9 @@ class Blather:
 			#close the  file
 			hfile.close()
 
-	# Print the cmd and then run the command
-	def run_command(self, cmd):
-		pass
-
 	def recognizer_finished(self, recognizer, text):
 		self.commander(t)
-		'''
-		print t
-		
-		#bump the computer into attentive listening mode. This enables all the other commands.
-		if t == 'oxygen':
-			self.attentive = True
-		
-		#is there a matching command?
-		if self.commands.has_key( t ) and self.attentive:
-			#run the valid_sentence_command if there is a valid sentence command
-			if self.options['valid_sentence_command']:
-				subprocess.call(self.options['valid_sentence_command'], shell=True)
-			cmd = self.commands[t]
-			#should we be passing words?
-			
-			if self.options['pass_words']:
-				cmd+=" "+t
-				self.run_command(cmd)
-			else:
-				self.run_command(cmd)
-				
-			self.log_history(text)
-		else:
-			#run the invalid_sentence_command if there is a valid sentence command
-			if self.options['invalid_sentence_command']:
-				subprocess.call(self.options['invalid_sentence_command'], shell=True)
-			print "no matching command %s" %(t)
-		
-		#this is to step the computer out of attentive mode. It will now only listen for it's name.
-		if t == 'stop listening':
-			self.attentive = False
-		'''
+
 		#if there is a UI and we are not continuous listen
 		if self.ui:
 			if not self.continuous_listen:

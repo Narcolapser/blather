@@ -13,7 +13,7 @@
 			"call":"stop listening",
 			"cmd":{
 				"type":"blather",
-				"instruction":"self.attentive = False"
+				"instruction":"inattentive"
 			}
 		},
 		{
@@ -21,7 +21,15 @@
 			"call":"computer",
 			"cmd":{
 				"type":"blather",
-				"instruction":"self.attentive = True"
+				"instruction":"attentive"
+			}
+		},
+		{
+			"name":"exit blather",
+			"call":"close blather",
+			"cmd":{
+				"type":"blather",
+				"instruction":"exit"
 			}
 		},
 		{
